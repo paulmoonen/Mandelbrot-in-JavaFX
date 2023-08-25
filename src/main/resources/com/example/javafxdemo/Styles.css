@@ -1,0 +1,17 @@
+#canvas {
+    -fx-cursor: crosshair;
+}
+
+#coordinatenTekst {
+    -fx-stroke: darkblue;
+    -fx-font-family: Arial;
+    -fx-font-style: italic;
+}
+
+#vulButton {
+    -fx-background-color: pink;
+}
+
+#leegButton {
+    -fx-background-color: lightblue;
+}

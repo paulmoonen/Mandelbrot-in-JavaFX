@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<FlowPane   xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.javafxdemo.RandomStipjesController"
+            prefHeight="400.0" prefWidth="600.0"
+            hgap="5" vgap="5">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Canvas fx:id="canvas" height="400" width="600" onMouseClicked="#canvasClickHandler"/>
+
+    <Button fx:id="vulButton" onAction="#vulKlikHandler">vul</Button>
+    <Button fx:id="leegButton" onAction="#leegKlikHandler">leeg</Button>
+
+    <Label fx:id="coordinatenTekst">klik in veld</Label>
+
+    <stylesheets>
+        <URL value="@Styles.css" />
+    </stylesheets>
+</FlowPane>
