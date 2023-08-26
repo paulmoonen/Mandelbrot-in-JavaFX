@@ -21,10 +21,11 @@
 
     <Canvas fx:id="canvas" height="400" width="600" onMouseClicked="#canvasClickHandler"/>
 
-    <Button fx:id="vulButton" onAction="#vulKlikHandler">vul</Button>
+    <Button fx:id="100RandomButton" onAction="#randomKlikHandler">100 random</Button>
     <Button fx:id="leegButton" onAction="#leegKlikHandler">leeg</Button>
+    <Button fx:id="vloedButton" onAction="#vloedKlikHandler">vloed</Button>
 
-    <Label fx:id="coordinatenTekst">klik in veld</Label>
+    <Label fx:id="tekst">klik in veld</Label>
 
     <stylesheets>
         <URL value="@Styles.css" />

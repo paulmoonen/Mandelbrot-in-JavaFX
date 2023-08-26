@@ -1,44 +1,40 @@
 package com.example.javafxdemo;
 
+import javafx.geometry.Point2D;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class BereikMapTest {
 
-    @Test
-    void percentageBlijftGelijkBijPositieveGelijkeRichting() {
-        double onderGrensOud = 0;
-        double bovenGrensOud = 10;
-        double voortgangOud = 2;
-        double onderGrensNieuw = 0;
-        double bovenGrensNieuw = 100;
+    private static BereikMap bereikmap;
 
-        assertEquals(20, BereikMap.mapWaarde(onderGrensOud, bovenGrensOud,
-                voortgangOud, onderGrensNieuw, bovenGrensNieuw) );
+    /**
+     * maak een wiskundig gebied van 60 breed en 40 hoog,
+     * met de oorsprong in het midden
+     */
+    @BeforeAll
+    static void init() {
+        bereikmap = new BereikMap(-30,30, -20,20);
     }
 
     @Test
-    void percentageBlijftGelijkRondOorsprongGelijkeRichting() {
-        double onderGrensOud = -5;
-        double bovenGrensOud = 5;
-        double voortgangOud = -3;
-        double onderGrensNieuw = 0;
-        double bovenGrensNieuw = 100;
-
-        assertEquals(20, BereikMap.mapWaarde(onderGrensOud, bovenGrensOud,
-                voortgangOud, onderGrensNieuw, bovenGrensNieuw) );
+    @DisplayName("Midden van canvas is wiskundig nulpunt")
+    void middenCanvasIsNulpunt() {
+        Point2D geklikt = new Point2D(300, 200); // midden in canvas
+        Point2D wiskundig = bereikmap.mapPoint(geklikt);
+        assertEquals(0, wiskundig.getX());
+        assertEquals(0, wiskundig.getY());
     }
 
     @Test
-    void yAsTest() {
-        // 4oo pixels hoog scherm, linksboven oorsprong
-        double onderGrensOud = 400;
-        double bovenGrensOud = 0;
-        double voortgangOud = 2;
-        double onderGrensNieuw = 4;
-        double bovenGrensNieuw = 5;
-
-        assertEquals(4.995, BereikMap.mapWaarde(onderGrensOud, bovenGrensOud,
-                voortgangOud, onderGrensNieuw, bovenGrensNieuw) );
+    @DisplayName("punt linksbovenin beeld aangeklikt krijgt de juiste x- en y-waardes")
+    void eenTiendeVanLinksboven() {
+        Point2D geklikt = new Point2D(60,40);
+        Point2D wiskundig = bereikmap.mapPoint(geklikt);
+        assertEquals(-24, wiskundig.getX());
+        assertEquals(16, wiskundig.getY());
     }
 }

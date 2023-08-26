@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 /**
  * @author Paul Moonen
  * <p>
  * p.c.c.moonen@gmail.com
  * <p>
- * zet honderd random stipjes in beeld
+ * opstartklasse
+ * toon leuke dingen in beeld
  */
 public class RandomStipjes extends Application {
 
