@@ -34,4 +34,10 @@ public class BereikMap {
         double y = ((HOOGTE - punt.getY()) / HOOGTE) * (yHoog - yLaag) + yLaag;
         return new Point2D(x,y);
     }
+
+    public ComplexGetal mapGetal(Point2D punt) {
+        double x = ((punt.getX() / BREEDTE) * (xHoog - xLaag)) + xLaag;
+        double y = ((HOOGTE - punt.getY()) / HOOGTE) * (yHoog - yLaag) + yLaag;
+        return new ComplexGetal(x, y);
+    }
 }
