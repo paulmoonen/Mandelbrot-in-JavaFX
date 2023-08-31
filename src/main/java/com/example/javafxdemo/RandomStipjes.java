@@ -15,7 +15,7 @@ import java.io.IOException;
  * opstartklasse
  * toon leuke dingen in beeld
  */
-public class RandomStipjes extends Application {
+public class  RandomStipjes extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {

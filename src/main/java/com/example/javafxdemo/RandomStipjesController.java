@@ -16,8 +16,8 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import static com.example.javafxdemo.Constants.BREEDTE;
-import static com.example.javafxdemo.Constants.HOOGTE;
+import static com.example.javafxdemo.Constants.*;
+import static com.example.javafxdemo.KleurFuncties.geefHSB;
 
 /**
  * @author Paul Moonen
@@ -28,6 +28,11 @@ import static com.example.javafxdemo.Constants.HOOGTE;
  */
 public class RandomStipjesController implements Initializable {
 
+    private static final int R_LAAG1 = -2;
+    private static final int R_HOOG1 = 1;
+    private static final int I_LAAG1 = -1;
+    private static final int I_HOOG1 = 1;
+    private static final double VLUCHTGRENS = 4;
     private static Set<Point2D> pixelMatrix;
 
     @FXML private Canvas canvas;
@@ -41,60 +46,56 @@ public class RandomStipjesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         context = canvas.getGraphicsContext2D();
-        leegKlikHandler(new ActionEvent());
         pixelMatrix = new HashSet<>();
         for(int x = 0; x < BREEDTE; x++){
             for(int y = 0; y < HOOGTE; y++){
                 pixelMatrix.add(new Point2D(x,y));
             }
         }
-        bereikMap = new BereikMap(-30,30,-20,20);
+        resetBereikmap();
+        tekenMandelbrot();
+    }
+
+    private void resetBereikmap() {
+        bereikMap = new BereikMap(R_LAAG1, R_HOOG1, I_LAAG1, I_HOOG1);
     }
 
     public void canvasClickHandler(@NotNull MouseEvent mouseEvent) {
         int x = (int)mouseEvent.getX();
         int y = (int)mouseEvent.getY();
         Point2D klik = new Point2D(x, y);
-        Point2D wiskundig = bereikMap.mapPoint(klik);
-        tekst.setText(String.format("Klik x: %d y: %d\nwiskundig x: %f y: %f\n",
-                x,y, wiskundig.getX(), wiskundig.getY() ));
+        bereikMap.zoomKaderInOpPunt(klik);
+        tekenMandelbrot();
     }
 
-    private void plaatsStipjes() {
-        for(int i = 0; i < 100; i++){
-            int pointX = getRandom(BREEDTE);
-            int pointY = getRandom(HOOGTE);
-            context.setStroke(new Color(Math.random(), Math.random(), Math.random(),1 ));
-            context.strokeLine(pointX, pointY, pointX, pointY);
-        }
+    public void resetKlikHandler(ActionEvent actionEvent) {
+        resetBereikmap();
+        tekenMandelbrot();
     }
 
-    public int getRandom(int maxIncl){
-        int spreidingBreedte = maxIncl + 1;
-        double randomVanafNul = Math.random() * spreidingBreedte;
-        return (int)randomVanafNul;
+    public void MandelbrotKlikHandler(ActionEvent actionEvent) {
+        tekenMandelbrot();
     }
 
-    public void randomKlikHandler(ActionEvent actionEvent) {
-        plaatsStipjes();
-    }
-
-    public void leegKlikHandler(ActionEvent actionEvent) {
-        context.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-        context.setFill(Color.BLACK);
-        context.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
-    }
-
-    public void vloedKlikHandler(ActionEvent actionEvent) {
-
+    private void tekenMandelbrot() {
         for (Point2D punt : pixelMatrix) {
-            double grijswaarde = geefGrijswaarde(punt);
-            context.setStroke(new Color(grijswaarde, grijswaarde, grijswaarde,1 ));
-            context.strokeLine(punt.getX(), punt.getY(), punt.getX(), punt.getY());
+            ComplexGetal iter = new ComplexGetal(0,0);
+            ComplexGetal c = bereikMap.mapGetal(punt);
+
+            int i;
+            for(i = 0; i < 1000; i++) {
+                if(iter.vectorLengte() > VLUCHTGRENS) {
+                    break;
+                }
+                iter  = iter.kwadraat().plus(c);
+            }
+            Color kleur = (i < 1000)? geefHSB(i) : Color.BLACK;
+            tekenPunt(punt,kleur);
         }
     }
 
-    static double geefGrijswaarde(Point2D punt) {
-        return (punt.getX() + punt.getY()) / 1000;
+    private void tekenPunt(Point2D punt, Color kleur) {
+        context.setStroke(kleur);
+        context.strokeLine(punt.getX(), punt.getY(), punt.getX(), punt.getY());
     }
 }

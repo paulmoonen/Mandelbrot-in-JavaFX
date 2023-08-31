@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -21,9 +18,8 @@
 
     <Canvas fx:id="canvas" height="400" width="600" onMouseClicked="#canvasClickHandler"/>
 
-    <Button fx:id="100RandomButton" onAction="#randomKlikHandler">100 random</Button>
-    <Button fx:id="leegButton" onAction="#leegKlikHandler">leeg</Button>
-    <Button fx:id="vloedButton" onAction="#vloedKlikHandler">vloed</Button>
+    <Button fx:id="resetButton" onAction="#resetKlikHandler">reset</Button>
+<!--   even niet nodig  <Button fx:id="mndButton" onAction="#MandelbrotKlikHandler" >Mandelbrot</Button>-->
 
     <Label fx:id="tekst">klik in veld</Label>
 

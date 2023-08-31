@@ -9,10 +9,11 @@ import lombok.Getter;
  * <p>
  * complex getal, met bijbehorende rekenregels
  */
+
 public class ComplexGetal {
 
-    @Getter private final double r;
-    @Getter private final double i;
+    private double r;
+    private double i;
 
     public ComplexGetal(double r, double i) {
         this.r = r;
@@ -27,6 +28,13 @@ public class ComplexGetal {
     public ComplexGetal plus(ComplexGetal g) {
         return new ComplexGetal((r + g.getR()), (i + g.getI()));
     }
+
+    /**
+     * optellen
+     * @param d ander getal dat we bij dit getal optellen
+     * @return ComplexGetal antwoord
+     */
+    public ComplexGetal plus(double d) { return new ComplexGetal(r + d, i);}
 
     /**
      * aftrekken
@@ -79,5 +87,21 @@ public class ComplexGetal {
 
         return new ComplexGetal((r * g.getR() + (i * g.getI() )) / (g.getR() * g.getR() + g.getI() * g.getI()),
                 (i * g.getR() - r * g.getI()) / ((g.getR() * g.getR() + g.getI() * g.getI())));
+    }
+
+    /**
+     * stelling van pythagoras, lengte van de vecorvoorstelling van het complexe getal
+     * @return vectorlengte
+     */
+    public double vectorLengte() {
+        return Math.sqrt(r*r + i*i);
+    }
+
+    public double getR() { return r;}
+    public double getI() { return i;}
+
+    @Override
+    public String toString() {
+        return String.format("r: %3f, i: %3f", r,i );
     }
 }

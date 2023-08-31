@@ -1,8 +1,7 @@
 package com.example.javafxdemo;
 
 import javafx.geometry.Point2D;
-import lombok.AllArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.Setter;
 
 import static com.example.javafxdemo.Constants.BREEDTE;
 import static com.example.javafxdemo.Constants.HOOGTE;
@@ -12,16 +11,23 @@ import static com.example.javafxdemo.Constants.HOOGTE;
  * <p>
  * p.c.c.moonen@gmail.com
  * <p>
- * verplaats een waarde van het ene domein naar het andere
+ * vertaal een muisklik in het canvas naar een complex getal
  */
-@Accessors
-@AllArgsConstructor
+@Setter
 public class BereikMap {
 
-    private double xLaag;
-    private double xHoog;
-    private double yLaag;
-    private double yHoog;
+    public static final double ZOOMFACTOR = 1.1;
+    private double rLaag;
+    private double rHoog;
+    private double iLaag;
+    private double iHoog;
+
+    public BereikMap(double rLaag, double rHoog, double iLaag, double iHoog) {
+        this.rLaag = rLaag;
+        this.rHoog = rHoog;
+        this.iLaag = iLaag;
+        this.iHoog = iHoog;
+    }
 
     /**
      * vertaal een muisklik-locatie in het Canvas-element, naar het juiste wiskundige punt
@@ -30,14 +36,27 @@ public class BereikMap {
      * @return Point2D wiskundig punt
      */
     public Point2D mapPoint(Point2D punt) {
-        double x = ((punt.getX() / BREEDTE) * (xHoog - xLaag)) + xLaag;
-        double y = ((HOOGTE - punt.getY()) / HOOGTE) * (yHoog - yLaag) + yLaag;
+        double x = ((punt.getX() / BREEDTE) * (rHoog - rLaag)) + rLaag;
+        double y = ((HOOGTE - punt.getY()) / HOOGTE) * (iHoog - iLaag) + iLaag;
         return new Point2D(x,y);
     }
 
     public ComplexGetal mapGetal(Point2D punt) {
-        double x = ((punt.getX() / BREEDTE) * (xHoog - xLaag)) + xLaag;
-        double y = ((HOOGTE - punt.getY()) / HOOGTE) * (yHoog - yLaag) + yLaag;
+        double x = ((punt.getX() / BREEDTE) * (rHoog - rLaag)) + rLaag;
+        double y = ((HOOGTE - punt.getY()) / HOOGTE) * (iHoog - iLaag) + iLaag;
         return new ComplexGetal(x, y);
+    }
+
+    public void zoomKaderInOpPunt(Point2D klik) {
+        ComplexGetal p = mapGetal(klik);
+        setRLaag(p.getR() - ( (p.getR() - rLaag) / ZOOMFACTOR));
+        setRHoog(p.getR() + ( (rHoog - p.getR()) / ZOOMFACTOR));
+        setILaag(p.getI() - ( (p.getI() - iLaag) / ZOOMFACTOR));
+        setIHoog(p.getI() + ( (iHoog - p.getI()) / ZOOMFACTOR));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("x van %d tot %d\ny van %d tot %d", rLaag, rHoog, iLaag, iHoog);
     }
 }

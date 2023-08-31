@@ -18,6 +18,19 @@ class ComplexGetalTest {
     }
 
     @Test
+    void telDoubleBijOp() {
+        ComplexGetal a = new ComplexGetal(3,-5);
+        double b = 1.35;
+
+        ComplexGetal som = a.plus(b);
+
+        assertEquals(4.35, som.getR());
+        assertEquals(-5, som.getI());
+    }
+
+
+
+    @Test
     void trekAf() {
         ComplexGetal a = new ComplexGetal(5,-3);
         ComplexGetal b = new ComplexGetal(2,4);
@@ -58,6 +71,12 @@ class ComplexGetalTest {
 
         assertEquals(-0.2, breuk.getR());
         assertEquals(0.4, breuk.getI());
+    }
+
+    @Test
+    void vectorLengte() {
+        ComplexGetal getal = new ComplexGetal(3,4);
+        assertEquals(5, getal.vectorLengte());
     }
 
 }
