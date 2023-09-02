@@ -3,8 +3,8 @@ package com.example.javafxdemo;
 import javafx.geometry.Point2D;
 import lombok.Setter;
 
-import static com.example.javafxdemo.Constants.BREEDTE;
-import static com.example.javafxdemo.Constants.HOOGTE;
+import static com.example.javafxdemo.Constanten.BREEDTE;
+import static com.example.javafxdemo.Constanten.HOOGTE;
 
 /**
  * @author Paul Moonen
@@ -16,7 +16,7 @@ import static com.example.javafxdemo.Constants.HOOGTE;
 @Setter
 public class BereikMap {
 
-    public static final double ZOOMFACTOR = 1.1;
+    public static final double ZOOMFACTOR = 1.1 ;
     private double rLaag;
     private double rHoog;
     private double iLaag;

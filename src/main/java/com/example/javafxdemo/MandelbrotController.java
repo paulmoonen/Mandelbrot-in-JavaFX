@@ -16,23 +16,24 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import static com.example.javafxdemo.Constants.*;
-import static com.example.javafxdemo.KleurFuncties.geefHSB;
+import static com.example.javafxdemo.Constanten.*;
+import static com.example.javafxdemo.KleurFuncties.*;
 
 /**
  * @author Paul Moonen
  * <p>
  * p.c.c.moonen@gmail.com
  * <p>
- * events afhandelen
+ * functies
  */
-public class RandomStipjesController implements Initializable {
+public class MandelbrotController implements Initializable {
 
     private static final int R_LAAG1 = -2;
     private static final int R_HOOG1 = 1;
     private static final int I_LAAG1 = -1;
     private static final int I_HOOG1 = 1;
     private static final double VLUCHTGRENS = 4;
+    public static final String KLIK_IN_VELD = "klik op plek waar je wil inzoomen";
     private static Set<Point2D> pixelMatrix;
 
     @FXML private Canvas canvas;
@@ -54,6 +55,7 @@ public class RandomStipjesController implements Initializable {
         }
         resetBereikmap();
         tekenMandelbrot();
+        tekst.setText(KLIK_IN_VELD);
     }
 
     private void resetBereikmap() {
@@ -65,12 +67,15 @@ public class RandomStipjesController implements Initializable {
         int y = (int)mouseEvent.getY();
         Point2D klik = new Point2D(x, y);
         bereikMap.zoomKaderInOpPunt(klik);
+        ComplexGetal klikLocatie = bereikMap.mapGetal(klik);
+        tekst.setText(String.format("geklikt op: (%2f + %2fi)", klikLocatie.getR(), klikLocatie.getI()));
         tekenMandelbrot();
     }
 
     public void resetKlikHandler(ActionEvent actionEvent) {
         resetBereikmap();
         tekenMandelbrot();
+        tekst.setText(KLIK_IN_VELD);
     }
 
     public void MandelbrotKlikHandler(ActionEvent actionEvent) {

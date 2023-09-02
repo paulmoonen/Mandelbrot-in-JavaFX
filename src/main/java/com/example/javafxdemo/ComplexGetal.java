@@ -1,7 +1,5 @@
 package com.example.javafxdemo;
 
-import lombok.Getter;
-
 /**
  * @author Paul Moonen
  * <p>
@@ -57,7 +55,6 @@ public class ComplexGetal {
         ac + adi + bci -bd  =
         (ac - bd) , (ad + bc) * i
         */
-
         return new ComplexGetal((r * g.getR() - i * g.getI()),
                                 (r * g.getI() + i * g.r));
     }

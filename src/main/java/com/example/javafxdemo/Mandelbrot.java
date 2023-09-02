@@ -13,20 +13,18 @@ import java.io.IOException;
  * p.c.c.moonen@gmail.com
  * <p>
  * opstartklasse
- * toon leuke dingen in beeld
  */
-public class  RandomStipjes extends Application {
+public class Mandelbrot extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(RandomStipjes.class.getResource("RandomStipjes.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Mandelbrot.class.getResource("Mandelbrot.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Stipjes Walhalla");
+        stage.setTitle("Mandelbrot verzameling");
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         Application.launch(args);
     }

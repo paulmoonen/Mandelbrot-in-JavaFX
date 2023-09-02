@@ -1,5 +1,6 @@
 package com.example.javafxdemo;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -78,5 +79,4 @@ class ComplexGetalTest {
         ComplexGetal getal = new ComplexGetal(3,4);
         assertEquals(5, getal.vectorLengte());
     }
-
 }

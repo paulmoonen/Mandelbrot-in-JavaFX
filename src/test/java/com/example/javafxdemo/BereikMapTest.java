@@ -23,7 +23,7 @@ class BereikMapTest {
     @Test
     @DisplayName("Midden van canvas is wiskundig nulpunt")
     void middenCanvasIsNulpunt() {
-        Point2D geklikt = new Point2D(300, 200); // midden in canvas
+        Point2D geklikt = new Point2D(450, 300); // midden in canvas
         Point2D wiskundig = bereikmap.mapPoint(geklikt);
         assertEquals(0, wiskundig.getX());
         assertEquals(0, wiskundig.getY());
@@ -32,7 +32,7 @@ class BereikMapTest {
     @Test
     @DisplayName("punt linksbovenin beeld aangeklikt krijgt de juiste x- en y-waardes")
     void eenTiendeVanLinksboven() {
-        Point2D geklikt = new Point2D(60,40);
+        Point2D geklikt = new Point2D(90,60);
         Point2D wiskundig = bereikmap.mapPoint(geklikt);
         assertEquals(-24, wiskundig.getX());
         assertEquals(16, wiskundig.getY());
