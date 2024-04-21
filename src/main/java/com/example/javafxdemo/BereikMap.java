@@ -1,7 +1,6 @@
 package com.example.javafxdemo;
 
 import javafx.geometry.Point2D;
-import lombok.Setter;
 
 import static com.example.javafxdemo.Constanten.BREEDTE;
 import static com.example.javafxdemo.Constanten.HOOGTE;
@@ -13,14 +12,30 @@ import static com.example.javafxdemo.Constanten.HOOGTE;
  * <p>
  * vertaal een muisklik in het canvas naar een complex getal
  */
-@Setter
 public class BereikMap {
 
     public static final double ZOOMFACTOR = 1.1 ;
+
     private double rLaag;
     private double rHoog;
     private double iLaag;
     private double iHoog;
+
+    public void setRLaag(double rLaag) {
+        this.rLaag = rLaag;
+    }
+
+    public void setRHoog(double rHoog) {
+        this.rHoog = rHoog;
+    }
+
+    public void setILaag(double iLaag) {
+        this.iLaag = iLaag;
+    }
+
+    public void setIHoog(double iHoog) {
+        this.iHoog = iHoog;
+    }
 
     public BereikMap(double rLaag, double rHoog, double iLaag, double iHoog) {
         this.rLaag = rLaag;
@@ -30,7 +45,7 @@ public class BereikMap {
     }
 
     /**
-     * vertaal een muisklik-locatie in het Canvas-element, naar het juiste wiskundige punt
+     * Vertaal een muisklik-locatie in het Canvas-element, naar het juiste wiskundige punt
      * in een begrensd stuk wiskundig coördinatenstelsel
      * @param punt muisklik-coördinaten
      * @return Point2D wiskundig punt
@@ -57,6 +72,6 @@ public class BereikMap {
 
     @Override
     public String toString() {
-        return String.format("x van %d tot %d\ny van %d tot %d", rLaag, rHoog, iLaag, iHoog);
+        return String.format("x van %f tot %f\ny van %f tot %f", rLaag, rHoog, iLaag, iHoog);
     }
 }
